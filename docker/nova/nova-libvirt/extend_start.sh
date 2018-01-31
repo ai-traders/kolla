@@ -22,3 +22,6 @@ if [[ $(stat -c %a /var/log/kolla/libvirt) != "755" ]]; then
     chmod 755 /var/log/kolla/libvirt
     chmod 644 /var/log/kolla/libvirt/libvirtd.log
 fi
+
+set -e
+sudo -E /usr/bin/ait_mounts
