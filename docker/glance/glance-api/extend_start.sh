@@ -7,3 +7,6 @@ if [[ "${!KOLLA_BOOTSTRAP[@]}" ]]; then
     glance-manage db_load_metadefs
     exit 0
 fi
+
+set -e
+sudo -E /usr/bin/ait_mounts
