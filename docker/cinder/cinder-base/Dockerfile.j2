@@ -32,10 +32,16 @@ LABEL maintainer="{{ maintainer }}" name="{{ image_name }}" build-date="{{ build
                 'qemu-img'
         ] %}
      {% elif base_distro in ['debian', 'ubuntu'] %}
+     
+RUN apt-get update &&\
+  apt-get install -y python-software-properties software-properties-common &&\
+  add-apt-repository -y ppa:gluster/glusterfs-3.12
+
         {% set cinder_base_packages = [
                 'ceph-common',
                 'lvm2',
-                'qemu-utils'
+                'qemu-utils',
+                'glusterfs-client'
         ] %}
     {% endif %}
 {{ macros.install_packages(cinder_base_packages | customizable("packages")) }}
