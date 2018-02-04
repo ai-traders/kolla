@@ -43,6 +43,14 @@ RUN ln -s swift-base-source/* swift \
     && chown -R swift: /etc/swift /var/cache/swift
 {% endif %}
 
+RUN git clone --branch pike --depth 1 https://github.com/ai-traders/swiftonfile.git /opt/swiftonfile &&\
+  easy_install /opt/swiftonfile
+
+RUN apt-get update &&\
+ apt-get install -y python-software-properties software-properties-common &&\
+ add-apt-repository -y ppa:gluster/glusterfs-3.12 &&\
+ apt-get install -y glusterfs-client
+
 COPY swift-rootwrap /var/lib/kolla/venv/bin/swift-rootwrap
 COPY rootwrap.conf /etc/swift/rootwrap.conf
 COPY swift_sudoers /etc/sudoers.d/kolla_swift_sudoers
