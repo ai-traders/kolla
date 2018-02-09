@@ -44,3 +44,6 @@ deb https://sensu.global.ssl.fastly.net/apt xenial main
 
 # Opendaylight repo
 deb http://ppa.launchpad.net/odl-team/carbon/ubuntu xenial main
+
+# Ceph
+deb https://download.ceph.com/debian-luminous xenial main

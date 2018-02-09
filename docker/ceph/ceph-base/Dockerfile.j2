@@ -34,7 +34,9 @@ LABEL maintainer="{{ maintainer }}" name="{{ image_name }}" build-date="{{ build
         'hdparm',
         'parted',
         'radosgw',
-        'xfsprogs'
+        'xfsprogs',
+        'git',
+        'python-setuptools'
     ] %}
 
     {% if base_arch in ['x86_64'] %}
@@ -45,6 +47,11 @@ LABEL maintainer="{{ maintainer }}" name="{{ image_name }}" build-date="{{ build
 
 {% endif %}
 {{ macros.install_packages(ceph_base_packages | customizable("packages")) }}
+
+RUN git clone --branch luminous --depth 1 https://github.com/ceph/ceph.git /tmp/ceph &&\
+  easy_install /tmp/ceph/src/ceph-volume/ &&\
+  rm -rf /tmp/ceph &&\
+  ceph-volume -h
 
 COPY extend_start.sh /usr/local/bin/kolla_extend_start
 RUN chmod 755 /usr/local/bin/kolla_extend_start
