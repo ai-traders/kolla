@@ -144,24 +144,46 @@ def extract_disk_info(ct, dev, name, use_udev):
         kwargs['partition'] = dev.device_node
         kwargs['partition_num'] = \
             re.sub(r'.*[^\d]', '', dev.device_node)
-        if is_dev_matched_by_name(dev, name, 'strict', use_udev):
-            kwargs['external_journal'] = False
-            kwargs['journal'] = dev.device_node[:-1] + '2'
-            kwargs['journal_device'] = kwargs['device']
-            kwargs['journal_num'] = 2
-        else:
+        mylabel = get_id_part_entry_name(dev, use_udev)
+        if mylabel.endswith('_J'):
+            return # This partition is a journal for some other
+        if mylabel.endswith('_BLUESTORE'):
+            return # This partition is a bluestore for some other
+        if mylabel.endswith('_BLUEDB'):
+            return # This partition is a bluestore RocksDB for some other
+        # So this partion is most likely holding a filesystem with ceph data or metadata, named like KOLLA_CEPH_DATA_0
+        # we should find related partions by adding suffixes
+        journal_name = mylabel + '_J'
+        for journal in find_disk(ct, journal_name, 'strict', use_udev):
+            kwargs['journal'] = journal.device_node
+            kwargs['journal_device'] = \
+                journal.find_parent('block').device_node
+            kwargs['journal_num'] = \
+                re.sub(r'.*[^\d]', '', journal.device_node)
+            break
+        if 'journal' in kwargs:
             kwargs['external_journal'] = True
-            journal_name = get_id_part_entry_name(dev, use_udev) + '_J'
-            for journal in find_disk(ct, journal_name, 'strict', use_udev):
-                kwargs['journal'] = journal.device_node
-                kwargs['journal_device'] = \
-                    journal.find_parent('block').device_node
-                kwargs['journal_num'] = \
-                    re.sub(r'.*[^\d]', '', journal.device_node)
-                break
-            if 'journal' not in kwargs:
-                # NOTE(SamYaple): Journal not found, not returning info
-                return
+        else: # There is no journal device. Which is fine for bluestore
+            kwargs['journal'] = ''
+            kwargs['journal_device'] = ''
+            kwargs['journal_num'] = ''
+            kwargs['external_journal'] = False
+
+        bluedb_name = mylabel + '_BLUEDB'
+        for bluedb in find_disk(ct, bluedb_name, 'strict', use_udev):
+            kwargs['bluedb'] = bluedb.device_node
+            kwargs['bluedb_device'] = \
+                bluedb.find_parent('block').device_node
+            kwargs['bluedb_num'] = \
+                re.sub(r'.*[^\d]', '', bluedb.device_node)
+            break
+        if 'bluedb' in kwargs:
+            kwargs['external_bluedb'] = True
+        else: # There is no bluedb device. Which is fine for bluestore, which can put RocksDB on main block device
+            kwargs['bluedb'] = ''
+            kwargs['bluedb_device'] = ''
+            kwargs['bluedb_num'] = ''
+            kwargs['external_bluedb'] = False
     else:
         kwargs['device'] = dev.device_node
     yield kwargs
