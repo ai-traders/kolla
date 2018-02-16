@@ -8,7 +8,9 @@ LABEL maintainer="{{ maintainer }}" name="{{ image_name }}" build-date="{{ build
 {{ macros.configure_user(name='collectd') }}
 
 {% set collectd_packages = [
-    'collectd'
+    'collectd',
+    'smartmontools',
+    'lm-sensors'
 ] %}
 
 {% if base_distro in ['centos', 'oraclelinux', 'rhel'] %}
@@ -19,8 +21,11 @@ LABEL maintainer="{{ maintainer }}" name="{{ image_name }}" build-date="{{ build
 {% endif %}
 {{ macros.install_packages(collectd_packages | customizable("packages")) }}
 
+COPY collectd_sudoers /etc/sudoers.d/kolla_collectd_sudoers
+COPY collectd-smartmon.sh /usr/bin/collectd-smartmon
+
 COPY extend_start.sh /usr/local/bin/kolla_extend_start
-RUN chmod 755 /usr/local/bin/kolla_extend_start \
+RUN chmod 755 /usr/local/bin/kolla_extend_start /usr/bin/collectd-smartmon \
     && chown -R collectd /var/lib/collectd \
     && chown -R collectd /etc/collectd* \
     && chown -R collectd /var/run/
