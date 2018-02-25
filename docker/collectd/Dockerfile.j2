@@ -10,7 +10,9 @@ LABEL maintainer="{{ maintainer }}" name="{{ image_name }}" build-date="{{ build
 {% set collectd_packages = [
     'collectd',
     'smartmontools',
-    'lm-sensors'
+    'lm-sensors',
+    'ceph-common',
+    'python-rados'
 ] %}
 
 {% if base_distro in ['centos', 'oraclelinux', 'rhel'] %}
@@ -23,6 +25,8 @@ LABEL maintainer="{{ maintainer }}" name="{{ image_name }}" build-date="{{ build
 
 COPY collectd_sudoers /etc/sudoers.d/kolla_collectd_sudoers
 COPY collectd-smartmon.sh /usr/bin/collectd-smartmon
+
+RUN easy_install git+https://github.com/ai-traders/collectd-ceph-storage.git
 
 COPY extend_start.sh /usr/local/bin/kolla_extend_start
 RUN chmod 755 /usr/local/bin/kolla_extend_start /usr/bin/collectd-smartmon \
