@@ -56,11 +56,12 @@ def read_file(filename):
 
 def main():
     admin_keyring = 'ceph.client.admin.keyring'
+    backdoor_keyring = 'ceph.client.backdoor.keyring'
     mon_keyring = 'ceph.client.mon.keyring'
     rgw_keyring = 'ceph.client.radosgw.keyring'
     monmap = 'ceph.monmap'
 
-    files = [admin_keyring, mon_keyring, rgw_keyring, monmap]
+    files = [admin_keyring, backdoor_keyring, mon_keyring, rgw_keyring, monmap]
     json_exit({filename: read_file(filename) for filename in files})
 
 
