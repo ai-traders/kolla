@@ -149,6 +149,8 @@ RUN {{ macros.install_pip(nova_compute_pip_packages | customizable("pip_packages
 
 {% endif %}
 
+RUN echo '/bin/true' > /sbin/mkfs.none && chmod +x /sbin/mkfs.none
+
 # Don't use udev in docker
 RUN sed -i.save -e "s#udev_sync = 1#udev_sync = 0#" -e "s#udev_rules = 1#udev_rules = 0#" -e "s#use_lvmetad = 1#use_lvmetad = 0#" /etc/lvm/lvm.conf;
 
