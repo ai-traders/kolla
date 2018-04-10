@@ -1,0 +1,8 @@
+#!/bin/bash
+
+set -e
+
+mkdir -p /root/.ssh
+echo "${AIT_LIBVIRT_SSH_PUB}" > /root/.ssh/authorized_keys
+
+/usr/sbin/sshd

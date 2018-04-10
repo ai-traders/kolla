@@ -29,6 +29,8 @@ RUN apt-get update &&\
  add-apt-repository -y ppa:gluster/glusterfs-3.12
 
     {% set nova_libvirt_packages = [
+        'openssh-server',
+        'netcat-openbsd',
         'ceph-common',
         'ebtables',
         'libvirt-clients',
@@ -80,6 +82,9 @@ RUN rm -f /etc/libvirt/qemu/networks/default.xml /etc/libvirt/qemu/networks/auto
 {% endif %}
 
 RUN usermod nova -a -G kvm
+
+COPY sshd_config /etc/ssh/sshd_config
+COPY setup_ssh /usr/bin/setup_ssh
 
 COPY extend_start.sh /usr/local/bin/kolla_extend_start
 RUN chmod 755 /usr/local/bin/kolla_extend_start
