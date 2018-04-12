@@ -286,6 +286,10 @@ COPY apt_preferences.{{ base_distro }} /etc/apt/preferences
 {% endblock %}
 
 {% set base_apt_packages = [
+   'tzdata',
+   'kbd',
+   'kmod',
+   'util-linux',
    'apt-utils',
    'curl',
    'gawk',

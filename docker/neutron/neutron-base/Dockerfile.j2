@@ -47,6 +47,9 @@ LABEL maintainer="{{ maintainer }}" name="{{ image_name }}" build-date="{{ build
             'iproute2',
             'iputils-ping',
             'keepalived',
+            'libsnmp30',
+            'libperl5.22',
+            'perl-modules-5.22',
             'net-tools',
             'neutron-lbaas-common',
             'neutron-plugin-ml2',
@@ -89,6 +92,9 @@ RUN mkdir -p /usr/share/neutron \
         {% set neutron_base_packages = [
             'conntrack',
             'dnsmasq',
+            'dnsmasq-base',
+            'libnettle6=3.3-2~cloud0',
+            'libhogweed4=3.3-2~cloud0',
             'dnsmasq-utils',
             'haproxy',
             'iproute2',
@@ -97,6 +103,9 @@ RUN mkdir -p /usr/share/neutron \
             'iputils-arping',
             'iputils-ping',
             'keepalived',
+            'libsnmp30',
+            'libperl5.22',
+            'perl-modules-5.22',
             'net-tools',
             'openvswitch-switch',
             'python-openvswitch',
@@ -105,6 +114,8 @@ RUN mkdir -p /usr/share/neutron \
 
     {% endif %}
 
+# Patch debase image
+RUN . /etc/os-release && apt-get -t ${UBUNTU_CODENAME} --allow-downgrades -y install perl-base=5.22.1-9ubuntu0.2
 {{ macros.install_packages(neutron_base_packages | customizable("packages")) }}
 
 ADD neutron-base-archive /neutron-base-source

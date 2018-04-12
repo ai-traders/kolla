@@ -1,6 +1,12 @@
 # For non-x86 architectures we use sources.list.debian.ARCHITECTURENAME
 
-# Default repos
+# blitznote default:
+# deb [arch=amd64] http://archive.ubuntu.com/ubuntu/ xenial main universe
+deb [arch=amd64] http://archive.ubuntu.com/ubuntu/ xenial-backports main universe
+# deb [arch=amd64] http://archive.ubuntu.com/ubuntu/ xenial-updates main universe
+# deb [arch=amd64] http://security.ubuntu.com/ubuntu/ xenial-security main universe
+deb [arch=amd64] https://s.blitznote.com/debs/ubuntu/amd64/ all/
+# official default:
 deb http://archive.ubuntu.com/ubuntu/ xenial main restricted universe multiverse
 deb http://archive.ubuntu.com/ubuntu/ xenial-updates main restricted universe multiverse
 deb http://archive.ubuntu.com/ubuntu/ xenial-security main restricted universe multiverse

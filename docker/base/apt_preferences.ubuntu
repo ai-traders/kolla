@@ -1,19 +1,19 @@
 Package: ceph*
-Pin: version 12.2.2
+Pin: version 12.2.4
 Pin-Priority: 550
 
 Package: *rbd*
-Pin: version 12.2.2
+Pin: version 12.2.4
 Pin-Priority: 550
 
 Package: python-cephfs
-Pin: version 12.2.2
+Pin: version 12.2.4
 Pin-Priority: 550
 
 Package: *rados*
-Pin: version 12.2.2
+Pin: version 12.2.4
 Pin-Priority: 550
 
 Package: *rgw*
-Pin: version 12.2.2
+Pin: version 12.2.4
 Pin-Priority: 550
