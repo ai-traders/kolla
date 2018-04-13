@@ -2,7 +2,7 @@
 
 # blitznote default:
 # deb [arch=amd64] http://archive.ubuntu.com/ubuntu/ xenial main universe
-deb [arch=amd64] http://archive.ubuntu.com/ubuntu/ xenial-backports main universe
+# deb [arch=amd64] http://archive.ubuntu.com/ubuntu/ xenial-backports main universe
 # deb [arch=amd64] http://archive.ubuntu.com/ubuntu/ xenial-updates main universe
 # deb [arch=amd64] http://security.ubuntu.com/ubuntu/ xenial-security main universe
 deb [arch=amd64] https://s.blitznote.com/debs/ubuntu/amd64/ all/
@@ -52,4 +52,5 @@ deb https://sensu.global.ssl.fastly.net/apt xenial main
 deb http://ppa.launchpad.net/odl-team/carbon/ubuntu xenial main
 
 # Ceph
-deb https://download.ceph.com/debian-luminous xenial main
+# deb https://download.ceph.com/debian-luminous xenial main
+deb http://apt.ai-traders.com/ceph Debian main

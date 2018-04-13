@@ -30,29 +30,20 @@ LABEL maintainer="{{ maintainer }}" name="{{ image_name }}" build-date="{{ build
    {% set ceph_base_packages = [
         'btrfs-tools',
         'ceph',
+        'libjemalloc1',
         'e2fsprogs',
         'hdparm',
         'parted',
         'radosgw',
         'xfsprogs',
-        'git',
         'python-setuptools',
         'bc'
     ] %}
 
-    {% if base_arch in ['x86_64'] %}
-        {% set ceph_base_packages = ceph_base_packages + [
-            'ceph-fuse'
-        ] %}
-    {% endif %}
-
 {% endif %}
 {{ macros.install_packages(ceph_base_packages | customizable("packages")) }}
 
-RUN git clone --branch luminous --depth 1 https://github.com/ceph/ceph.git /tmp/ceph &&\
-  easy_install /tmp/ceph/src/ceph-volume/ &&\
-  rm -rf /tmp/ceph &&\
-  ceph-volume -h
+RUN ldd /usr/bin/ceph-osd | grep libjemalloc
 
 RUN sed -i.save -e "s#udev_sync = 1#udev_sync = 0#" -e "s#udev_rules = 1#udev_rules = 0#" -e "s#use_lvmetad = 1#use_lvmetad = 0#" /etc/lvm/lvm.conf
 

@@ -332,7 +332,8 @@ COPY apt_preferences.{{ base_distro }} /etc/apt/preferences
       'A20F259AEB9C94BB'
     ] %}
     {% set remote_apt_keys = [
-      'https://download.ceph.com/keys/release.asc'
+      'https://download.ceph.com/keys/release.asc',
+      'http://apt.ai-traders.com/pubkey.gpg'
     ] %}
 {% elif base_distro == 'debian' %}
     {% set base_apt_keys = [
@@ -345,7 +346,7 @@ COPY apt_preferences.{{ base_distro }} /etc/apt/preferences
       'E84AC2C0460F3994',
     ] %}
     {% set remote_apt_keys = [
-      'https://people.linaro.org/~marcin.juszkiewicz/debian/stretch/Release.key',
+      'https://people.linaro.org/~marcin.juszkiewicz/debian/stretch/Release.key'
     ] %}
     {% set base_apt_packages = base_apt_packages +
       ['sudo',]
