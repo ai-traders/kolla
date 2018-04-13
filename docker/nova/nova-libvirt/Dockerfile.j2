@@ -24,10 +24,6 @@ LABEL maintainer="{{ maintainer }}" name="{{ image_name }}" build-date="{{ build
 
 {% elif base_distro in ['debian', 'ubuntu'] %}
 
-RUN apt-get update &&\
- apt-get install -y python-software-properties software-properties-common &&\
- add-apt-repository -y ppa:gluster/glusterfs-3.12
-
     {% set nova_libvirt_packages = [
         'openssh-server',
         'netcat-openbsd',
@@ -38,8 +34,7 @@ RUN apt-get update &&\
         'openvswitch-switch',
         'pm-utils',
         'qemu',
-        'qemu-block-extra',
-        'glusterfs-client'
+        'qemu-block-extra'
     ] %}
 
     {% if base_arch == "aarch64" %}

@@ -87,10 +87,6 @@ RUN rm -f /etc/nova/nova-compute.conf
 
     {% elif base_distro in ['debian', 'ubuntu'] %}
 
-RUN apt-get update &&\
- apt-get install -y python-software-properties software-properties-common &&\
- add-apt-repository -y ppa:gluster/glusterfs-3.12
-
         {% set nova_compute_packages = [
             'ceph-common',
             'dosfstools',
@@ -103,8 +99,7 @@ RUN apt-get update &&\
             'open-iscsi',
             'python-libguestfs',
             'python-libvirt',
-            'qemu-utils',
-            'glusterfs-client'
+            'qemu-utils'
         ] %}
 
         {% if base_arch == "aarch64" %}
