@@ -276,7 +276,7 @@ ENV DEBIAN_FRONTEND noninteractive
 {{ macros.install_packages(openstack_base_packages | customizable("packages")) }}
 
 {% block source_install_python_pip %}
-RUN curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py \
+RUN curl https://raw.githubusercontent.com/pypa/get-pip/f135a3e3bf81b840d5232617c455feca5f03a21f/get-pip.py -o get-pip.py \
     && python get-pip.py \
     && rm get-pip.py
 {% endblock %}
