@@ -1,0 +1,13 @@
+{% extends parent_template %}
+
+# Base image
+{% block base_ubuntu_package_pre %}
+RUN echo 'Acquire::http::Proxy "http://apt-cache.ai-traders.com:3142";' > /etc/apt/apt.conf.d/01_proxy &&\
+  echo 'Acquire::https::Proxy "DIRECT";' >> /etc/apt/apt.conf.d/01_proxy &&\
+  echo 'Acquire::http::Proxy::apt.ai-traders.com "DIRECT";' >> /etc/apt/apt.conf.d/01_proxy
+# Need apt-transport-https and ca-certificates before replacing sources.list or
+# apt-get update will not work if any repositories are accessed via HTTPS
+RUN apt-get update \
+    && apt-get -y install --no-install-recommends apt-transport-https ca-certificates gnupg dirmngr curl nano wget \
+    && apt-get clean
+{% endblock %}

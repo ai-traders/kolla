@@ -1,0 +1,2 @@
+IDE_DOCKER_IMAGE="docker-registry.base.ai-traders.com:5000/ansibleide:0.2.1"
+IDE_DOCKER_OPTIONS="--volume /var/run/docker.sock:/var/run/docker.sock"

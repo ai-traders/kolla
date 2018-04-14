@@ -1,0 +1,22 @@
+pipelines:
+  infra-openstack2-images:
+    group: openstack
+    label_template: "${git[:8]}"
+    materials:
+      git:
+        git: "git@github.com:ai-traders/kolla.git"
+        branch: stable/pike
+    stages:
+      - build:
+          clean_workspace: true
+          approval: manual
+          jobs:
+            build:
+              resources:
+                - docker_builder
+              tasks:
+               - exec:
+                  command: /bin/bash
+                  arguments:
+                    - -c
+                    - "./tasks build"

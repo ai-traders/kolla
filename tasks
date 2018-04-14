@@ -1,0 +1,19 @@
+#!/bin/bash
+
+set -e
+
+command="$1"
+case "${command}" in
+  _build)
+      sudo pip install -r requirements.txt
+      sudo ./tools/build.py --config-file kolla-build.conf --template-override template-overrides.j2 --profile ait --push
+      ;;
+  build)
+      ide "./tasks _build"
+      ;;
+  *)
+      echo "Invalid command: '${command}'"
+      exit 1
+      ;;
+esac
+set +e
