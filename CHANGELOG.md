@@ -1,3 +1,7 @@
+### 5.0.2.9 (2018-Apr-15)
+
+ * revert to official ubuntu:16.04
+
 ### 5.0.2.8 (2018-Apr-14)
 
  * rebuild with ceph packages built with debase image.
