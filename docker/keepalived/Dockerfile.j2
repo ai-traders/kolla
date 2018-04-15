@@ -14,10 +14,7 @@ LABEL maintainer="{{ maintainer }}" name="{{ image_name }}" build-date="{{ build
 {% elif base_distro in ['debian', 'ubuntu'] %}
     {% set keepalived_packages = [
         'keepalived',
-        'socat',
-        'libsnmp30',
-        'libperl5.22',
-        'perl-modules-5.22'
+        'socat'
     ] %}
 {% endif %}
 {{ macros.install_packages(keepalived_packages | customizable("packages")) }}

@@ -5,9 +5,6 @@ LABEL maintainer="{{ maintainer }}" name="{{ image_name }}" build-date="{{ build
 
 {% import "macros.j2" as macros with context %}
 
-# PATCH debase image, tzdata is files are missing, reinstalls later
-RUN apt-get remove -y tzdata
-
 {{ macros.configure_user(name='horizon') }}
 
 {% if install_type == 'binary' %}
