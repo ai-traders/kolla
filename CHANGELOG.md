@@ -1,3 +1,7 @@
+### 5.0.2.10 - Unreleased
+
+ * added AIT ca.crt to trusted CAs
+
 ### 5.0.2.9 (2018-Apr-15)
 
  * revert to official ubuntu:16.04

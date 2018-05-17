@@ -286,6 +286,7 @@ COPY apt_preferences.{{ base_distro }} /etc/apt/preferences
 {% endblock %}
 
 {% set base_apt_packages = [
+   'ca-certificates',
    'apt-utils',
    'curl',
    'gawk',
@@ -393,6 +394,9 @@ COPY sudoers /etc/sudoers
 COPY curlrc /root/.curlrc
 
 {% block dumb_init_installation %}
+
+COPY ./ca.crt /usr/local/share/ca-certificates/ait.crt
+RUN update-ca-certificates
 
 {% if base_arch == 'x86_64' %}
 
