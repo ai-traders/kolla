@@ -1,4 +1,4 @@
-### 5.0.2.10 - Unreleased
+### 5.0.2.10 (2018-May-19)
 
  * added AIT ca.crt to trusted CAs
 

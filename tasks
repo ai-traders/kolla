@@ -1,6 +1,41 @@
 #!/bin/bash
 
 set -e
+if [[ ! -f ./releaser ]];then
+  wget --quiet http://http.archive.ai-traders.com/releaser/1.0.3/releaser
+fi
+source ./releaser
+releaser_init
+
+function get_last_version_from_changelog {
+  changelog_file="$1"
+  if [[ -z "${changelog_file}" ]];then
+    log_error "changelog_file not set"
+    return 1
+  fi
+  if [[ ! -f "${changelog_file}" ]];then
+    log_error "${changelog_file} does not exist"
+    return 1
+  fi
+  version=$(cat $changelog_file | head -1 | grep -o -e "[0-9]*\.[0-9]*\.[0-9]*\.[0-9]*")
+  if [[ "${version}" == "" ]];then
+    log_error "Could not get last version from ${changelog_file}"
+    return 1
+  fi
+  echo "${version}"
+}
+
+function validate_version_is_semver {
+  version="$1"
+  if [[ -z "${version}" ]];then
+    log_error "version not set"
+    return 1
+  fi
+  if [[ ! "${version}" =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+ ]]; then
+    log_error "Version was not SemVer. It was: ${version}. Must be e.g. 0.1.2"
+    return 1
+  fi
+}
 
 command="$1"
 case "${command}" in
@@ -10,6 +45,21 @@ case "${command}" in
       ;;
   build)
       ide "./tasks _build"
+      ;;
+  set_version)
+      if [[ -n "$2" ]]; then
+        next_version="$2"
+        set_version_in_changelog "${changelog_file}" "${next_version}"
+        set_next_oversion "${next_version}"
+      else
+        next_version=$(get_next_oversion)
+        set_version_in_changelog "${changelog_file}" "${next_version}"
+      fi
+      exit $?
+      ;;
+  verify_version)
+      verify_version_for_release
+      exit $?
       ;;
   *)
       echo "Invalid command: '${command}'"

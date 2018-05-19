@@ -7,9 +7,20 @@ pipelines:
         git: "git@github.com:ai-traders/kolla.git"
         branch: stable/pike
     stages:
+      - verify_version:
+          clean_workspace: true
+          jobs:
+            verify_version:
+              resources:
+                - docker_builder
+              tasks:
+                - exec:
+                    command: /bin/bash
+                    arguments:
+                      - -c
+                      - ./tasks verify_version
       - build:
           clean_workspace: true
-          approval: manual
           jobs:
             build:
               resources:
@@ -20,3 +31,15 @@ pipelines:
                   arguments:
                     - -c
                     - "./tasks build"
+      - release:
+          clean_workspace: true
+          jobs:
+            code:
+              resources:
+                - docker_builder
+              tasks:
+                - exec:
+                    command: /bin/bash
+                    arguments:
+                      - -c
+                      - ./tasks release
