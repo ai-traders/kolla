@@ -61,6 +61,14 @@ case "${command}" in
       verify_version_for_release
       exit $?
       ;;
+  release)
+      verify_version_for_release
+      git_tag_from_oversion
+      old_version=$(get_next_oversion)
+      next_version=$(bump_patch_version "${old_version}")
+      set_next_oversion "${next_version}"
+      exit $?
+      ;;
   *)
       echo "Invalid command: '${command}'"
       exit 1
