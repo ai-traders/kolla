@@ -1,3 +1,7 @@
+### 5.0.2.11 (2018-May-22)
+
+ * updated cinder-volume to 11.0.2 to fix CPU usage and rbd disk usage
+
 ### 5.0.2.10 (2018-May-19)
 
  * added AIT ca.crt to trusted CAs
