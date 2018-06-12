@@ -48,3 +48,6 @@ deb http://ppa.launchpad.net/odl-team/carbon/ubuntu xenial main
 # Ceph
 # deb https://download.ceph.com/debian-luminous xenial main
 deb http://apt.ai-traders.com/ceph Debian main
+
+# Newer libstdc++ for ceph 13
+deb http://ppa.launchpad.net/ubuntu-toolchain-r/test/ubuntu xenial main
