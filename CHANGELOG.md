@@ -2,6 +2,7 @@
 
  * update designate image to use ait fork with race condition fix \#12767
  * added python-influxdb in ceph images for monitoring directly to influxdb
+ * upgrade nova to tarball `nova-16.0.4` to fix qemu-img info errors \#16543
 
 ### 5.0.2.11 (2018-Jun-12)
 
