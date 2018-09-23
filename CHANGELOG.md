@@ -1,5 +1,6 @@
 ### 5.0.2.12 - Unreleased
 
+ * update designate image to use ait fork with race condition fix \#12767
  * added python-influxdb in ceph images for monitoring directly to influxdb
 
 ### 5.0.2.11 (2018-Jun-12)
