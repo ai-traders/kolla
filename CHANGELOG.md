@@ -1,6 +1,10 @@
+### 5.0.2.12 - Unreleased
+
+ * added python-influxdb in ceph images for monitoring directly to influxdb
+
 ### 5.0.2.11 (2018-Jun-12)
 
- * upgrade ceph to 13.2
+ * upgrade ceph to 13.2.0
  * fix MariaDB bootstrap error. Upstream \#1772442
 
 ### 5.0.2.10 (2018-May-22)
