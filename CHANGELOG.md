@@ -1,8 +1,9 @@
-### 5.0.2.12 - Unreleased
+### 5.0.2.12 (2018-Sep-26)
 
  * update designate image to use ait fork with race condition fix \#12767
  * added python-influxdb in ceph images for monitoring directly to influxdb
  * upgrade nova to tarball `nova-16.0.4` to fix qemu-img info errors \#16543
+ * upgrade ceph to 13.2.2 and fix memory leak in ceph-mgr \#16572
 
 ### 5.0.2.11 (2018-Jun-12)
 
