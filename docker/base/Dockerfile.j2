@@ -276,6 +276,8 @@ RUN apt-get update \
 {% block base_ubuntu_package_sources_list %}
 {% if base_distro == 'debian' or ( base_distro == 'ubuntu' and base_arch == 'x86_64' ) %}
 COPY sources.list.{{ base_distro }} /etc/apt/sources.list
+# This source is for ceph clients, we use luminous because of libc issues
+RUN echo 'deb https://download.ceph.com/debian-luminous xenial main' > /etc/apt/sources.list.d/ceph.list
 {% else %}
 COPY sources.list.{{ base_distro }}.{{ base_arch }} /etc/apt/sources.list
 {% endif %}

@@ -1,3 +1,7 @@
+### 5.0.2.13 (2018-Oct-13)
+
+ * split ceph images, only OSD is built with jemalloc
+
 ### 5.0.2.12 (2018-Sep-26)
 
  * update designate image to use ait fork with race condition fix \#12767

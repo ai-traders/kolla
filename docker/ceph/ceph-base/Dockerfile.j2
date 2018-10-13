@@ -29,6 +29,8 @@ LABEL maintainer="{{ maintainer }}" name="{{ image_name }}" build-date="{{ build
 
 {% if base_distro == 'ubuntu' %}
 COPY apt_preferences.ubuntu /etc/apt/preferences
+# This source is for all ceph except OSD
+RUN echo 'deb http://apt.ai-traders.com/ceph-patches Debian main' > /etc/apt/sources.list.d/ceph.list
 {% endif %}
 
    {% set ceph_base_packages = [
@@ -47,8 +49,6 @@ COPY apt_preferences.ubuntu /etc/apt/preferences
 
 {% endif %}
 {{ macros.install_packages(ceph_base_packages | customizable("packages")) }}
-
-RUN ldd /usr/bin/ceph-osd | grep libjemalloc
 
 RUN sed -i.save -e "s#udev_sync = 1#udev_sync = 0#" -e "s#udev_rules = 1#udev_rules = 0#" -e "s#use_lvmetad = 1#use_lvmetad = 0#" /etc/lvm/lvm.conf
 
