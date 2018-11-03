@@ -1,2 +1,3 @@
 collectd ALL=(root) NOPASSWD:/usr/sbin/smartctl *
 collectd ALL=(root) NOPASSWD:/usr/sbin/sensors-detect *
+collectd ALL=(root) NOPASSWD:/usr/bin/fix-kernel-trace-perms

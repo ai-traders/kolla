@@ -1,0 +1,4 @@
+#!/bin/bash
+
+chmod +rx /sys/kernel/debug/
+chmod +rx /sys/kernel/debug/tracing
