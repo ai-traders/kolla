@@ -1,3 +1,8 @@
+### 5.0.2.14 (2018-Nov-03)
+
+ * updated collectd to 5.7
+ * collectd image fixes permissions to kernel tracing for vmem plugin
+
 ### 5.0.2.13 (2018-Oct-13)
 
  * split ceph images, only OSD is built with jemalloc
