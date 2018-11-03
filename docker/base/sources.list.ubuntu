@@ -51,3 +51,6 @@ deb http://ppa.launchpad.net/odl-team/carbon/ubuntu xenial main
 
 # Newer libstdc++ for ceph 13
 deb http://ppa.launchpad.net/ubuntu-toolchain-r/test/ubuntu xenial main
+
+# New collectd
+deb http://pkg.ci.collectd.org/deb/ xenial collectd-5.7

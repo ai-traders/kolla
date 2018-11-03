@@ -334,7 +334,8 @@ COPY apt_preferences.{{ base_distro }} /etc/apt/preferences
     ] %}
     {% set remote_apt_keys = [
       'https://download.ceph.com/keys/release.asc',
-      'http://apt.ai-traders.com/pubkey.gpg'
+      'http://apt.ai-traders.com/pubkey.gpg',
+      'http://pkg.ci.collectd.org/pubkey.asc'
     ] %}
 {% elif base_distro == 'debian' %}
     {% set base_apt_keys = [
