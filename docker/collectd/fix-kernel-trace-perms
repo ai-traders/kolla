@@ -1,4 +1,4 @@
 #!/bin/bash
 
-chmod +rx /sys/kernel/debug/
-chmod +rx /sys/kernel/debug/tracing
+chmod +rx /sys/kernel/debug/ || true
+chmod +rx /sys/kernel/debug/tracing || true
