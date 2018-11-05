@@ -7,4 +7,4 @@ if [[ $(stat -c %a /var/log/kolla/collectd) != "755" ]]; then
     chmod 755 /var/log/kolla/collectd
 fi
 
-sudo /usr/bin/fix-kernel-trace-perms
+sudo /usr/bin/fix-perms

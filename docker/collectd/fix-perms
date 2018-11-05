@@ -1,4 +1,6 @@
 #!/bin/bash
 
+setcap cap_net_raw=ep /usr/sbin/collectd
+
 chmod +rx /sys/kernel/debug/ || true
 chmod +rx /sys/kernel/debug/tracing || true

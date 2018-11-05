@@ -1,7 +1,8 @@
-### 5.0.2.14 (2018-Nov-03)
+### 5.0.2.14 - Unreleased
 
  * updated collectd to 5.7
  * collectd image fixes permissions to kernel tracing for vmem plugin
+ * added ping plugin support to collectd image
 
 ### 5.0.2.13 (2018-Oct-13)
 
