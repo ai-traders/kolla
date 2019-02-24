@@ -1,8 +1,9 @@
-### 5.0.2.14 - Unreleased
+### 5.0.2.14 (2019-Feb-24)
 
  * updated collectd to 5.7
  * collectd image fixes permissions to kernel tracing for vmem plugin
  * added ping plugin support to collectd image
+ * nova upgrade to 16.1.1 \#12770
 
 ### 5.0.2.13 (2018-Oct-13)
 
